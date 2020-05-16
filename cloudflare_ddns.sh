@@ -2,12 +2,15 @@ Email=example@example.com
 Global_Api_Key=1234567890123456789012345678901234567
 Domain=example.com
 A_Record=a.example.com
+ttl:120
+proxied:false
 
 echo "========== Cloudflare DDNS SCRIPT V 1.0.0 =========="
 
 IP=$(curl -s "https://ipv4.icanhazip.com/")
 API="https://api.cloudflare.com/client/v4"
-
+ttl_time=$ttl
+proxied_choose=$proxied
 echo "Ipv4 : " $IP
 
 H_Email="-HX-Auth-Email:$Email"
@@ -26,5 +29,5 @@ Record_ID=$(curl -s -X GET "$API/zones/$Zone_ID/dns_records?type=A&name=$A_Recor
 
 PUT=$(curl -s -X PUT "$API/zones/$Zone_ID/dns_records/$Record_ID" \
 	$H_Email $H_Auth_Key $H_Content \
-	--data '{"type":"A","name":"'"$A_Record"'","content":"'"$IP"'"}')
+	--data '{"type":"A","name":"'"$A_Record"'","content":"'"$IP"'","ttl":"'"$ttl_time"'","proxied":"'"$proxied_choose"'"}')
 
