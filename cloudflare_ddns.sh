@@ -2,8 +2,8 @@ Email=example@example.com
 Global_Api_Key=1234567890123456789012345678901234567
 Domain=example.com
 A_Record=a.example.com
-ttl:120
-proxied:false
+ttl=120
+proxied=false
 
 echo "========== Cloudflare DDNS SCRIPT V 1.0.0 =========="
 
